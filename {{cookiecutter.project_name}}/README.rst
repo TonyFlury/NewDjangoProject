@@ -11,9 +11,6 @@
 .. image:: https://codecov.io/github/{{cookiecutter.author_username}}/{{cookiecutter.project_repo}}/coverage.svg?branch=master
         :target: https://codecov.io/github/{{cookiecutter.author_username}}/{{cookiecutter.project_repo}}?branch=master
 
-.. image:: https://readthedocs.org/projects/{{cookiecutter.project_repo}}/badge/?version=latest
-        :target: https://readthedocs.org/projects/{{cookiecutter.project_repo}}/?badge=latest
-
 ------------
 Introduction
 ------------
@@ -78,9 +75,6 @@ License
 
 This software is covered by the provisions of `{{cookiecutter.license}} <LICENSE.rst>`_ License.
 
-
-.. _Full Documentation: {{cookiecutter.project_docs}}
-.. _On PyPi (Python Package Index): {{cookiecutter.project_pypi}}
 .. _Source code on GitHub: {{cookiecutter.project_gh}}
 
 .. _Github Issues: http://github.com/{{cookiecutter.author_username}}/{{cookiecutter.project_repo}}/issues/new

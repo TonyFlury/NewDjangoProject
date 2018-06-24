@@ -19,8 +19,12 @@ REQ_PATH = os.path.join(PROJECT_DIRECTORY,"requirements.txt")
 LICENSE_PATH = os.path.join(PROJECT_DIRECTORY,"LICENSE.rst")
 
 def create_django_project():
-    system('workon {{cookiecutter.project_repo}}35 ; django-admin startproject {{cookiecutter.project_repo}}')
- 
+    print("\n-------------------------------------")
+    print("Creating Django project\n")
+    with open('error.txt','w') as error:
+    subprocess.call([ '/bin/bash', '-i', '-c', 'workon', '{{cookiecutter.project_repo}}35', ';','django-admin', 'startproject', '{{cookiecutter.project_repo}}', '..'], shell=True,
+             stdout=sys.stdout,
+             stderr=error)
 
 def apply_license():
     """ Rename appropriate license file, and delete un needed files"""
@@ -36,8 +40,6 @@ def apply_license():
                       LICENSE_PATH )
         else:
             os.remove(os.path.join(PROJECT_DIRECTORY,li_file))
-    shutil.copy(LICENSE_PATH, 
-                    os.path.join(PROJECT_DIRECTORY,"docs","LICENSE.rst") )
 
 def apply_git():
     """Apply the relevant files to git, and create github as required"""
@@ -46,7 +48,7 @@ def apply_git():
     print("\n--------------------------------------")
     print("Initialising git & github remote repo - {{cookiecutter.project_repo}}")
     os.system( "git init .")
-    os.system( "git add {{cookiecutter.project_repo}}/*" )
+    os.system( "git add {}/*".format(PROJECT_DIRECTORY))
     os.system( "git add *" )
 
     # Perform initial commit project files
@@ -55,14 +57,12 @@ def apply_git():
     os.system( "git commit -m 'Initial commit with cookiecutter create' >/dev/null")
 
     # create github repository and link local repository
-    if "{{cookiecutter.create_external_resources}}" == "Yes":
-        print("\n---------------------------")
-        print( "Creating remote repository")
-        os.system( "git remote add origin {{cookiecutter.project_ghurl}} >/dev/null")
-        os.system( "curl -u '{{cookiecutter.author_username}}' https://api.github.com/user/repos -d '{\"name\":\"{{cookiecutter.project_repo}}\",\"description\":\"{{cookiecutter.project_desc}}\"}' >/dev/null")
-        os.system( "git push -u origin master" )
-    else:
-        print( "Warning : Remote Repository NOT created - as per request")
+
+    print("\n---------------------------")
+    print( "Creating remote repository")
+    os.system( "git remote add origin {{cookiecutter.project_ghurl}} >/dev/null")
+    os.system( "curl -u '{{cookiecutter.author_username}}' https://api.github.com/user/repos -d '{\"name\":\"{{cookiecutter.project_repo}}\",\"description\":\"{{cookiecutter.project_desc}}\"}' >/dev/null")
+    os.system( "git push -u origin master" )
 
 def apply_virtualenv():
     print("\n-----------------------")
@@ -111,10 +111,8 @@ apply_license()
 
 add_bug_reporting()
 
-apply_git()
-
 apply_virtualenv()
 
 create_django_project()
 
-
+apply_git()

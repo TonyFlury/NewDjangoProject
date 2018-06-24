@@ -4,7 +4,6 @@
     "author_email": "anthony.flury@btinternet.com",
     "project_name": "Project Name Here",
     "project_desc":"A short description of the project:",
-    "project_summary":"An expanded description of the project:",
     "project_repo": "{{cookiecutter.project_name|lower|replace(' ','')}}",
     "license": ["MIT", "GNU GPL v3.0", "Apache Software License 2.0"],
     "create_timestamp": "{% now 'utc', '%d %b %Y' %}",
