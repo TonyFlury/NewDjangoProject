@@ -1,3 +1,1 @@
-{% if cookiecutter.cli %}
-click
-{% endif %}
+django==2.0
